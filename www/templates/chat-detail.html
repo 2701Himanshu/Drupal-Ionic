@@ -6,13 +6,13 @@
 -->
 <ion-view>
   <ion-nav-title>
-    <b>{{data[0].data.title}}</b>
+    <b>{{data[0].data[0].title[0].value}}</b>
   </ion-nav-title>  
   <ion-content class="padding">
     
-    <b>This {{data[0].data.type}} is created by user of id:{{data[0].data.uid}} at {{data[0].data.created * 1000 | date:'medium'}}</b></br></br>
+    <b>This {{data[0].data[0].type[0].target_id}} is created by user of id:{{data[0].data[0].uid[0].target_id}} at {{data[0].data[0].created[0].value * 1000 | date:'medium'}}</b></br></br>
 
-    <pre>{{data[0].data.body.und[0].value}}</pre>
+    <pre>{{data[0].data[0].body[0].value}}</pre>
 
   </ion-content>
 </ion-view>

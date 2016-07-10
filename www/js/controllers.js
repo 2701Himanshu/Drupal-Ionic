@@ -1,31 +1,33 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', ['$scope', function($scope) {
+.controller('DashCtrl',['$scope', '$http', function($scope, $http) {
 
-
+  $scope.art = {};
   $scope.newTask = function(){
 
-    /*var package = {};
+    var package = {};
 
-    package.title = [{'value': $scope.Title}]
-    package.body = [{'value': $scope.body}]
-    package._links = {"$type": {"href": "http://localhost/cms/DP/Headless/drupal7/api/type/node/article"}}
+    package.title = [{'value': $scope.art.Title}]
+    package.body = [{'value': $scope.art.body}]
+    package.type = [{"target_id": "article"}]
+    //package._links = {"type": {"href": "http://localhost/cms/DP/Headless/d8/rest/type/node/article"}}
 
-    console.log(package);
-
+    //console.log(package);
 
     $http({
-      url: 'http://localhost/cms/DP/Headless/drupal7/entity/node',
+      url: 'http://localhost/cms/DP/Headless/d8/entity/node',
       method: 'POST',
       data: package,
       header: {
-        "Content-Type": "application/json"
+        //"Authorization": "",
+        "X-CSRF-Token": "RNtx2jSIkbLcIzhfeb_QMIQ0VBpgnBkgWy3ifoKvXr0",  //rest/session/token 
+        "Content-Type": "application/json",
       },
     })
     .success(function(data, status, headers, config){
-      $scope.Title = '';
-      $scope.body = '';
-    })*/
+      $scope.art.Title = '';
+      $scope.art.body = '';
+    })
 
   }
 

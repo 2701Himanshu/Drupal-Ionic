@@ -1,0 +1,52 @@
+<?php
+
+use Drupal\Core\Url;
+use Drupal\Core\Render\Markup;
+
+/**
+ * Implements hook_single_page_site_output_alter().
+ */
+function single_page_site_next_page_single_page_site_output_alter(&$output, $current_item) {
+  /** @var \Drupal\single_page_site\Manager\SinglePageSiteManager $manager */
+  $manager = Drupal::service('single_page_site.manager');
+  // Get menu items.
+  $menu_items = _single_page_site_next_page_get_single_page_items();
+
+  $count_menu_items = count($menu_items);
+  // If item is not last item.
+  if ($current_item < $count_menu_items) {
+    $menu_item = $menu_items[$current_item];
+    // Get route params.
+    $params = $menu_item['route_parameters'];
+    // Fetch href.
+    $href = Url::fromRoute($menu_item['route_name'], $params)->toString();
+    // Generate valid anchor.
+    $anchor = $manager->generateAnchor($href);
+    // Generate next url.
+    // (I know this is bad practice, but I haven't figured out yet how to render a link with only a fragment and no URL).
+    $next_page_link = '<a href="#' . $anchor . '" class="to-next-page">' . $menu_item['title'] . '</a>';
+    // Attach link to output by creating new markup object.
+    $output = Markup::create($output . $next_page_link);
+  }
+}
+
+/**
+ * Fetches single page items
+ * @return array
+ */
+function _single_page_site_next_page_get_single_page_items() {
+  $items = &drupal_static(__FUNCTION__);
+  if (!isset($items)) {
+    $items = array();
+    /** @var \Drupal\single_page_site\Manager\SinglePageSiteManager $manager */
+    $manager = Drupal::service('single_page_site.manager');
+    $tree = $manager->getMenuChildren();
+
+    foreach ($tree as $menu_item) {
+      if ($menu_item_details = $manager->isMenuItemRenderable($menu_item)) {
+        array_push($items, $menu_item_details);
+      }
+    }
+  }
+  return $items;
+}

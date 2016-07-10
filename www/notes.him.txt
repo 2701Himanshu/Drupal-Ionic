@@ -1,0 +1,23 @@
+Enable cors in drupa for using it as headless
+---------------------------------------------
+add these lines in .htaccess file of headless drupal 8 version
+
+===============================
+<IfModule mod_headers.c>
+  Header always set Access-Control-Allow-Origin "*"
+  Header always set Access-Control-Allow-Methods "POST, GET, OPTIONS, PATCH, DELETE"
+  Header always set Access-Control-Allow-Headers: Authorization
+</IfModule>
+===============================
+===============================
+RewriteCond %{REQUEST_METHOD} OPTIONS
+RewriteRule .* / [R=200,L]
+===============================
+
+Double check your apache has header module or run sudo a2enmod headers
+
+then restart the apache2 server
+
+reference url: https://github.com/enzolutions/backbone.drupal
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

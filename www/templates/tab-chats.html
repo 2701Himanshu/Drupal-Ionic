@@ -1,10 +1,10 @@
 <ion-view view-title="Chats">
   <ion-content>
     <ion-list>
-      <ion-item class="item-icon-right" ng-repeat="node in data" type="item-text-wrap" href="#/tab/chats/{{node.nid}}">
+      <ion-item class="item-icon-right" ng-repeat="node in data" type="item-text-wrap" href="#/tab/chats/{{node.nid[0].value}}">
         
         <!--img ng-src="{{chat.face}}"-->
-        <h2>{{node.title}}</h2>
+        <h2>{{node.title[0].value}}</h2>
         <i class="icon ion-chevron-right icon-accessory"></i>
         <!--on-option-button class="button-assertive" ng-click="remove(chat)"-->
 
