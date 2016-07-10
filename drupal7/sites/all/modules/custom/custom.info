@@ -1,6 +1,0 @@
-name = Custom CORS
-description = New Custom Module
-version = 7.*
-package = core
-core = 7.x
-file[] = custom.module
