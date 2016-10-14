@@ -33,11 +33,32 @@ angular.module('starter.controllers', [])
 
 }])
 
-.controller('Drupal', function($scope, Drupal){
+.controller('Drupal', function($scope, Drupal, $http, $ionicLoading){
+
+  $ionicLoading.show({
+      template: '<ion-spinner icon="ripple" class="spinner-assertive""></ion-spinner>'
+    }).then(function(){
+       console.log("The loading indicator is now displayed");
+    });
+
   Drupal.nodes
     .success(function(data){
       $scope.data = data;
+      $scope.bdy = data[0].body[0].value;
+        $ionicLoading.hide();
     });
+
+  $scope.doRefresh = function(){
+    $http.get('http://localhost/cms/DP/Headless/d8/api/article')
+      .success(function(data) {
+       $scope.data = data;
+     })
+    .finally(function() {
+       // Stop the ion-refresher from spinning
+       $scope.$broadcast('scroll.refreshComplete');
+     });
+  }
+
 })
 
 .controller('NodeCtrl', function($scope, $stateParams, DNode, $q){
@@ -51,7 +72,9 @@ angular.module('starter.controllers', [])
 
     $q.all([$scope.nodes]).then(function(data){
       $scope.data = data;
-      console.log($scope.data);
+      $scope.bdy = data[0].data[0].body[0].value;
+      //{{data[0].data[0].body[0].value}}
+      //console.log($scope.data);
     });
 })
 

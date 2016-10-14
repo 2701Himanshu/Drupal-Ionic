@@ -12,7 +12,14 @@
     
     <b>This {{data[0].data[0].type[0].target_id}} is created by user of id:{{data[0].data[0].uid[0].target_id}} at {{data[0].data[0].created[0].value * 1000 | date:'medium'}}</b></br></br>
 
-    <pre>{{data[0].data[0].body[0].value}}</pre>
+    <div>
+      <div style="width:30%; float:left;">
+        <img src="{{data[0].data[0].field_image[0].url}}" width="100%" style="padding:0px 14px 14px 0px" />
+      </div>
+      <div style="width:100%;">
+        <p ng-bind-html="bdy"></p>
+      </div>
+    </div>
 
   </ion-content>
 </ion-view>

@@ -1,1 +1,11 @@
 /* Empty. Add your own CSS if you like */
+.spinner svg {
+  width: 100px;
+  height: 100px;
+  stroke: #02faaf;
+  fill: #999;
+}
+
+.loading{
+    background-color: rgba(0, 0, 0, 0) !important;
+}

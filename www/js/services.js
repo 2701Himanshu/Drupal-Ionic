@@ -4,6 +4,7 @@ angular.module('starter.services', [])
   return {
     nodes : $http.get('http://localhost/cms/DP/Headless/d8/api/article')
   }
+  
 })
 
 .factory('DNode',function ($http) {
