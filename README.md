@@ -56,3 +56,9 @@ Use this Reference: http://www.inmotionhosting.com/support/edu/drupal-8/getting-
   ionic serve
   
 After running this command, the default browser is opened and output of the ionic application is shown on it.
+
+
+NOTE: Currently, this project is running in development mode. Therefore, it only be able to: 
+- Create drupal article from ionic application 
+- Retrieve articles form drupal api
+- Retrieve a perticular article information from drupal api
