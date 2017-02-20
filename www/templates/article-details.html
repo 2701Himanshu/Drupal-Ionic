@@ -1,0 +1,33 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+
+<!-- Hide top navaigational bar -->
+<!-- <ion-view hide-nav-bar="true"> -->
+
+<ion-view>
+  <ion-nav-title>
+    <b>{{ (data[0].data[0].title[0].value | limitTo: 20) + (data[0].data[0].title[0].value.length > 20 ? '...' : '') }}</b>
+  </ion-nav-title>  
+  <ion-content class="padding">
+
+    <div>
+      <div style="width:100%; float:top;" >
+          <img src="{{img.url}}" width="100%"/>
+          <b>This {{data[0].data[0].type[0].target_id}} is created by user of id:{{data[0].data[0].uid[0].target_id}} 
+                  at {{data[0].data[0].created[0].value * 1000 | date:'medium'}}</b></br></br>
+      </div>
+      <div style="width:100%;">
+        <p ng-bind-html="bdy"></p>
+      </div>
+    </div>
+    <!--<div style="width:100%;">
+        <p data-ng-if="{{img}}"> {{img}} </p>
+    </div>-->
+
+  </ion-content>
+</ion-view>
+

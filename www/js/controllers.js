@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl',['$scope', '$http', function($scope, $http) {
+.controller('AddCtrl',['$scope', '$http', function($scope, $http) {
 
   $scope.art = {};
   $scope.newTask = function(){
@@ -33,7 +33,7 @@ angular.module('starter.controllers', [])
 
 }])
 
-.controller('Drupal', function($scope, Drupal, $http, $ionicLoading){
+.controller('ListCtrl', function($scope, Drupal, $http, $ionicLoading){
 
   $ionicLoading.show({
       template: '<ion-spinner icon="ripple" class="spinner-assertive""></ion-spinner>'
@@ -58,24 +58,35 @@ angular.module('starter.controllers', [])
        $scope.$broadcast('scroll.refreshComplete');
      });
   }
-
 })
 
-.controller('NodeCtrl', function($scope, $stateParams, DNode, $q){
-  /*DNode.getNode.content
-    .success(function (data){
-      $scope.data = data;
-    });*/
+.controller('ArticleCtrl', function($rootScope, $ionicHistory, $scope, 
+                                        $stateParams, DNode, $q, $ionicTabsDelegate){
+
     id = $stateParams.nid;
     $scope.nodes = DNode.getNode(id);
     //console.log($scope.data);
 
     $q.all([$scope.nodes]).then(function(data){
       $scope.data = data;
+      $scope.img = data[0].data[0].field_image[0];
+      if(data[0].data[0].field_image.length == 0){
+          $scope.img = {
+            'url': 'http://localhost:8100/img/ionic.png' 
+          }
+      }else {
+          $scope.img = data[0].data[0].field_image[0];
+      }
       $scope.bdy = data[0].data[0].body[0].value;
-      //{{data[0].data[0].body[0].value}}
-      //console.log($scope.data);
     });
+    
+    $ionicTabsDelegate.showBar(false);
+
+    //overide back-button property
+    $rootScope.$ionicGoBack = function() {
+        $ionicHistory.goBack();
+        $ionicTabsDelegate.showBar(true);
+    };
 })
 
 .controller('ChatsCtrl', function($scope, Chats) {

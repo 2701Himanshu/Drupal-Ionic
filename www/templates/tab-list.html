@@ -1,0 +1,33 @@
+<ion-view>
+  <ion-nav-title>
+    <b>All Articles</b>
+  </ion-nav-title>
+
+  <ion-content>
+
+    <ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="doRefresh()">
+    </ion-refresher>
+    <ion-list>
+      <ion-item class="item-icon-right item-thumbnail-left"" collection-repeat="node in data" type="item-text-wrap" href="#/tab/list/{{node.nid[0].value}}">
+
+        <img ng-src="{{node.field_image[0].url}}">
+
+        <h2>{{node.title[0].value}}</h2>
+        <p>{{node.body[0].value}}</p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+        <!--on-option-button class="button-assertive" ng-click="remove(chat)"-->
+
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
+
+    <!--ion-infinite-scroll
+      ng-if="!noMoreItemsAvailable"
+      on-infinite="loadMore()"
+      distance="10%">
+    </ion-infinite-scroll-->
+
+  </ion-content>
+</ion-view>
